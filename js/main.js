@@ -9,6 +9,7 @@ function setAdaptiveBackground() {
   if (!bg) return;
 
   const ratio = window.innerWidth / window.innerHeight;
+  // Catatan: Anda harus memastikan folder "rawfiles" sudah benar
   let image = "rawfiles/images/bg_light_9x16.jpg"; // default portrait
 
   if (ratio > 1.4 && ratio < 1.8) {
@@ -42,6 +43,11 @@ function goToPage(url) {
   }, 700);
 }
 
+// Fungsi ini digunakan di book_select.html
+function openBook(url) {
+    goToPage(url);
+}
+
 /* ========== 3. FUNGSI TOMBOL BACK ========== */
 function goBack() {
   fadeOverlay.classList.add("fade-active");
@@ -73,3 +79,28 @@ function createGlowLights() {
 }
 
 window.addEventListener("load", createGlowLights);
+
+/* ========== 6. INISIALISASI TOMBOL & EVENT LISTENER (BARU) ========== */
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Tombol 'Mulai Membaca' di index.html
+    const startButton = document.getElementById("startButton");
+    if (startButton) {
+        startButton.addEventListener("click", () => {
+            // Navigasi ke book_select.html
+            goToPage("book_select.html");
+        });
+    }
+
+    // 2. Tombol 'Back' di halaman buku/select
+    const backButton = document.getElementById("btn-back"); // untuk halaman buku
+    if (backButton) {
+        backButton.addEventListener("click", goBack);
+    }
+    // Catatan: Tombol back di book_select.html menggunakan 'onclick="navigateTo()"' yang juga harus diperbaiki.
+    
+    // 3. Tombol 'Search' di halaman buku
+    const searchButton = document.getElementById("btn-search");
+    if (searchButton) {
+        searchButton.addEventListener("click", searchInPage);
+    }
+});
