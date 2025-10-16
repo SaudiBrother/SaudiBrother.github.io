@@ -40,44 +40,24 @@ body {
   height: 6px;
   background: radial-gradient(circle, #00eaff 0%, transparent 70%);
   border-radius: 50%;
-  animation: glowmove 8s infinite ease-in-out;
-  opacity: 0.4;
-  z-index: 0;
-}
-
-/* Animasi gerakan acak cahaya */
-@keyframes glowmove {
-  0% { transform: translate(10vw, 10vh) scale(1); }
-  25% { transform: translate(70vw, 20vh) scale(1.4); }
-  50% { transform: translate(50vw, 80vh) scale(0.8); }
-  75% { transform: translate(20vw, 60vh) scale(1.3); }
-  100% { transform: translate(10vw, 10vh) scale(1); }
-}
-
-/* ========== 4. KONTEN UTAMA (CARD & TEKS) ========== */
-.container {
+  pointer-events: none;
   z-index: 1;
-  text-align: center;
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 25px 40px;
-  border-radius: 24px;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  /* Animasi akan diset di main.js atau di CSS tambahan */
 }
 
-/* Judul besar (misal: “Perpustakaan Digital”) */
-.container h1 {
-  font-size: 1.9rem;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px #00eaff;
+/* ========== 4. FADE TRANSITION OVERLAY ========== */
+.fade-transition {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  opacity: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
 }
 
-/* Subjudul */
-.container p {
-  font-size: 1rem;
-  color: #b6ffff;
-  margin-bottom: 25px;
+.fade-transition.fade-active {
+  opacity: 1;
 }
 
 /* ========== 5. TOMBOL (GAYA UMUM) ========== */
@@ -102,55 +82,157 @@ button:hover, .btn:hover {
   background: linear-gradient(90deg, #00eaff, #0099ff);
 }
 
-/* ========== 6. TOMBOL BACK & SEARCH ========== */
-.nav-icons {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  gap: 15px;
-  z-index: 2;
+/* Tambahkan sisa kode CSS asli Anda di sini. Ini adalah bagian yang tidak dimuat sebelumnya. */
+
+/* CSS yang kurang di potongan sebelumnya */
+
+/* ========== 6. PENGATURAN INDEX PAGE ========== */
+.index-page main {
+    z-index: 10;
+    text-align: center;
 }
 
-.nav-icons img {
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 5px #00ffffaa);
-  transition: transform 0.2s ease;
+.index-page .title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #b6ffff;
+    margin-bottom: 25px;
 }
 
-.nav-icons img:hover {
-  transform: scale(1.2);
+.index-page .main-button {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.2rem;
+    padding: 15px 30px;
 }
 
-/* ========== 7. HALAMAN PEMBACAAN PDF ========== */
-.pdf-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
+/* ========== 7. BOOK SELECT PAGE ========== */
+.select-page .back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
-.pdf-viewer {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #000;
+.select-page .back-btn img {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
 }
 
-/* ========== 8. ANIMASI TRANSISI HITAM-PUDAR ========== */
-.fade-transition {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 99;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
+.select-page .page-title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 2.5rem;
 }
 
-.fade-active {
-  opacity: 1;
-  pointer-events: all;
+.book-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    padding: 20px;
 }
+
+.book-card {
+    width: 150px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+    background-color: #333;
+    text-align: center;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-card img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+}
+
+.book-card p {
+    padding: 5px;
+    margin: 0;
+    font-size: 0.9rem;
+    background-color: #222;
+}
+
+/* ========== 8. BOOK PAGE (iFrame) ========== */
+.book-page {
+    /* Gaya untuk halaman-halaman buku */
+    display: block;
+    height: 100vh;
+    padding: 0;
+}
+
+.book-page main {
+    width: 100%;
+    height: calc(100% - 60px); /* Kurangi tinggi header */
+    margin-top: 60px;
+}
+
+.book-page iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.icon-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.icon-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.page-info {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+                              }
