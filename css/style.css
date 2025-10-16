@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------
-   📘 PERPUSTAKAAN DIGITAL - STYLE.CSS
+   📘 PERPUSTAKAAN DIGITAL - STYLE.CSS (KODE FIX)
    Gaya umum untuk semua halaman (index & halaman buku)
 ----------------------------------------------------------- */
 
@@ -22,15 +22,21 @@ body {
   position: relative;
 }
 
-/* ========== 2. BACKGROUND ========== */
-.bg-light {
+/* ========== 2. BACKGROUND (index.html) ========== */
+#background {
   position: absolute;
-  inset: 0; /* buat gambar memenuhi layar */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Pastikan tidak ada scroll dari background */
+}
+
+#bg-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.25; /* biar teks tetap terbaca */
-  z-index: 0;
+  opacity: 0.2; /* Kecerahan background */
+  position: absolute;
 }
 
 /* ========== 3. EFEK CAHAYA RUANGAN ========== */
@@ -40,56 +46,26 @@ body {
   height: 6px;
   background: radial-gradient(circle, #00eaff 0%, transparent 70%);
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  /* Animasi akan diset di main.js atau di CSS tambahan */
+  animation: glowmove 8s infinite ease-in-out;
+  opacity: 0.4;
+  z-index: 0;
 }
 
-/* ========== 4. FADE TRANSITION OVERLAY ========== */
-.fade-transition {
-  position: fixed;
-  inset: 0;
-  background-color: #000;
-  opacity: 0;
-  z-index: 9999;
-  pointer-events: none;
-  transition: opacity 0.5s ease-out;
+@keyframes glowmove {
+  0% { transform: translate(10vw, 10vh) scale(1); }
+  25% { transform: translate(70vw, 20vh) scale(1.4); }
+  50% { transform: translate(50vw, 80vh) scale(0.8); }
+  75% { transform: translate(20vw, 60vh) scale(1.3); }
+  100% { transform: translate(10vw, 10vh) scale(1); }
 }
 
-.fade-transition.fade-active {
-  opacity: 1;
-}
 
-/* ========== 5. TOMBOL (GAYA UMUM) ========== */
-button, .btn {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px 0;
-  font-size: 1rem;
-  color: #fff;
-  background: linear-gradient(90deg, #00b3ff, #007bff);
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 15px rgba(0, 174, 255, 0.3);
-}
-
-button:hover, .btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 25px rgba(0, 238, 255, 0.5);
-  background: linear-gradient(90deg, #00eaff, #0099ff);
-}
-
-/* Tambahkan sisa kode CSS asli Anda di sini. Ini adalah bagian yang tidak dimuat sebelumnya. */
-
-/* CSS yang kurang di potongan sebelumnya */
-
-/* ========== 6. PENGATURAN INDEX PAGE ========== */
+/* ========== 4. HALAMAN INDEX/LOBBY (index.html) ========== */
 .index-page main {
     z-index: 10;
-    text-align: center;
+    text-align: right; /* Text dan tombol geser ke kanan */
+    padding-right: 5%;
+    width: 90%; /* Kontrol lebar konten utama */
 }
 
 .index-page .title {
@@ -97,17 +73,22 @@ button:hover, .btn:hover {
     font-weight: 600;
     color: #b6ffff;
     margin-bottom: 25px;
+    text-shadow: 0 0 15px rgba(0, 174, 255, 0.6);
 }
 
 .index-page .main-button {
     max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; /* PENTING: Geser tombol ke kanan */
+    margin-right: 0;
     font-size: 1.2rem;
     padding: 15px 30px;
 }
 
-/* ========== 7. BOOK SELECT PAGE ========== */
+/* ========== 5. HALAMAN PILIH BUKU (book_select.html) ========== */
+.select-page {
+  padding: 20px;
+}
+
 .select-page .back-btn {
     position: absolute;
     top: 20px;
@@ -118,11 +99,20 @@ button:hover, .btn:hover {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.select-page .back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .select-page .back-btn img {
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     filter: invert(1);
 }
 
@@ -131,6 +121,7 @@ button:hover, .btn:hover {
     margin-bottom: 30px;
     color: #fff;
     font-size: 2.5rem;
+    text-shadow: 0 0 10px #00ffff;
 }
 
 .book-grid {
@@ -140,6 +131,8 @@ button:hover, .btn:hover {
     gap: 20px;
     max-width: 900px;
     padding: 20px;
+    overflow-y: auto; /* Tambahkan scroll jika daftar buku panjang */
+    max-height: 80vh; /* Batasi tinggi grid */
 }
 
 .book-card {
@@ -169,9 +162,11 @@ button:hover, .btn:hover {
     margin: 0;
     font-size: 0.9rem;
     background-color: #222;
+    color: #b6ffff;
 }
 
-/* ========== 8. BOOK PAGE (iFrame) ========== */
+
+/* ========== 6. HALAMAN BUKU (PDF/Informatika) ========== */
 .book-page {
     /* Gaya untuk halaman-halaman buku */
     display: block;
@@ -185,10 +180,14 @@ button:hover, .btn:hover {
     margin-top: 60px;
 }
 
-.book-page iframe {
+.book-container iframe, .subject-content {
     width: 100%;
     height: 100%;
     border: none;
+    /* Gaya untuk konten informatika */
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .top-bar {
@@ -219,6 +218,12 @@ button:hover, .btn:hover {
     border-radius: 50%;
     cursor: pointer;
     transition: background 0.2s;
+    box-shadow: none; /* Hilangkan shadow tombol umum */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon-button:hover {
@@ -235,4 +240,21 @@ button:hover, .btn:hover {
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
-                              }
+}
+
+
+/* ========== 7. ANIMASI TRANSISI HITAM-PUDAR ========== */
+.fade-transition {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.fade-active {
+  opacity: 1;
+  pointer-events: all;
+}
