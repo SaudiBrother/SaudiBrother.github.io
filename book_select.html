@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Buku</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body class="fade-in">
+  <div class="container select-page">
+
+    <!-- Tombol Kembali -->
+    <button class="back-btn" onclick="navigateTo('index.html')">
+      <img src="rawfiles/icons/Back_Icon.svg" alt="Kembali">
+    </button>
+
+    <!-- Judul -->
+    <h1 class="page-title">Pilih Buku</h1>
+
+    <!-- Grid Buku -->
+    <div class="book-grid">
+      <div class="book-card" onclick="openBook('book_ipa.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Ipa.jpg" alt="IPA">
+        <p>IPA</p>
+      </div>
+
+      <div class="book-card" onclick="openBook('book_bahasa_indonesia.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Bahasa_Indonesia.png" alt="Bahasa Indonesia">
+        <p>Bahasa Indonesia</p>
+      </div>
+
+      <div class="book-card" onclick="openBook('book_agama_islam.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Agama_Islam.png" alt="Agama Islam">
+        <p>Agama Islam</p>
+      </div>
+
+      <div class="book-card" onclick="openBook('book_agama_kristen.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Agama_Kristen.png" alt="Agama Kristen">
+        <p>Agama Kristen</p>
+      </div>
+
+      <div class="book-card" onclick="openBook('book_ips.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Ips.png" alt="IPS">
+        <p>IPS</p>
+      </div>
+
+      <div class="book-card" onclick="openBook('book_informatika.html')">
+        <img src="rawfiles/cover/Buku.Mapel_Informatika.png" alt="Informatika">
+        <p>Informatika</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

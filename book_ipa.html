@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buku IPA | Perpus Digital</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="book-page" data-bg9x16="rawfiles/images/bg_light_9x16.jpg" data-bg16x9="rawfiles/images/bg_light_16x9.jpg" data-bg3x4="rawfiles/images/bg_light_3x4.jpg">
+
+  <!-- Overlay transisi saat pindah buku -->
+  <div id="transition-overlay"></div>
+
+  <!-- Bagian tombol navigasi -->
+  <header class="top-bar">
+    <div class="nav-buttons">
+      <button id="btn-back" class="icon-button">
+        <img src="rawfiles/icons/Back_Icon.svg" alt="Kembali">
+      </button>
+      <div class="page-info">
+        <span id="current-page">1</span> | <span id="total-pages">--</span>
+      </div>
+      <button id="btn-search" class="icon-button special-search">
+        <img src="rawfiles/icons/Search_Icon.svg" alt="Cari Halaman">
+      </button>
+    </div>
+  </header>
+
+  <!-- Kontainer buku PDF -->
+  <main class="book-container">
+    <iframe id="pdf-viewer" src="rawfiles/books/Buku_Ipa.pdf" frameborder="0"></iframe>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
